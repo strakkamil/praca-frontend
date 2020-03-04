@@ -1,0 +1,114 @@
+.login-modal{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 50%;
+  left: 50%;
+  height: 50vh;
+  width: 40vw;
+  background-color: white;
+  box-shadow: 0 15px 30px -10px #818181;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 20px;
+  animation: open .3s;
+  transition: .3s;
+}
+
+@keyframes open{
+  from {
+    transform: translate(-50%, -200%) scale(0);
+    opacity: 0;
+  }
+}
+
+.modalClose{
+  transform: translate(-50%, -200%) scale(0);
+  opacity: 0;
+}
+
+form{
+  height: 100%;
+}
+
+.form{
+  width: 20vw;
+  overflow: hidden;
+}
+ 
+.form .login, .password{
+  position: relative;
+  font-size: 24px;
+  width: 100%;
+}
+
+.form .login input, .password input{
+ width: 100%;
+ padding-top: 30px;
+ font-size: 24px;
+ border: none;
+ outline: none;
+ color:#333;
+}
+
+.form .login label, .password label{
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  pointer-events: none;
+  border-bottom: 1px solid black;
+}
+
+.form .login-label::after, .password-label::after{
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  border-bottom: 2px solid rgb(41,84,108);
+  left: -100%;
+  bottom: -1px;
+  transition: .3s;
+}
+
+.login-content, .password-content{
+  position: absolute;
+  bottom: 0px;
+  transition: .3s;
+}
+
+.login input:focus + .login-label .login-content, .login input:valid + .login-label .login-content,
+.password input:focus + .password-label .password-content, .password input:valid + .password-label .password-content{ 
+  transform: translateY(-130%);
+  font-size: 18px;
+  color: rgb(41,84,108);
+}
+
+.login input:focus + .login-label::after, .login input:valid + .login-label::after,
+.password input:focus + .password-label::after, .password input:valid + .password-label::after{
+transform: translateX(100%);
+}
+
+.button button{
+margin: 20px;
+height: 50px;
+width: 130px;
+font-size: 20px;
+background-color: white;
+border: 2px solid rgb(41,84,108);
+border-radius: 10px;
+transition: .2s;
+cursor: pointer;
+}
+
+.button button:hover{
+  background-color: rgb(41,84,108);
+  color: white;
+}
+
+
+
+
