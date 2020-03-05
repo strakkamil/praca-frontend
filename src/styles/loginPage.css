@@ -78,6 +78,7 @@ form{
   position: absolute;
   bottom: 0px;
   transition: .3s;
+  color:#333;
 }
 
 .login input:focus + .login-label .login-content, .login input:valid + .login-label .login-content,

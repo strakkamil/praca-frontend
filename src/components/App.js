@@ -4,7 +4,9 @@ import Nav from './Nav'
 import Header from './Header'
 import Footer from './Footer'
 import LoginPage from '../pages/loginPage'
+import registerPage from '../pages/registerPage'
 import axios from 'axios'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 
 class App extends Component {
@@ -13,7 +15,8 @@ class App extends Component {
     closeModalClass: false,
     login: '',
     password: '',
-    isAccess: false
+    isAccess: false,
+    role: ''
   }
 
   openModal = () => {
@@ -53,18 +56,19 @@ class App extends Component {
 
     localStorage.clear()
 
-    const root = {
-      login: this.state.login,
+    const patient = {
+      email: this.state.login,
       password: this.state.password
     }
 
-    axios.post('http://localhost:5000/root/login', root)
+    axios.post('http://localhost:5000/patient/login', patient)
       .then(res => localStorage.setItem('TOKEN_ROOT', res.data))
 
     setTimeout(() => {
-      axios.get('http://localhost:5000/root/', { headers: { authorization: localStorage.TOKEN_ROOT } })
+      axios.get('http://localhost:5000/patient/', { headers: { authorization: localStorage.TOKEN_ROOT } })
         .then(res => this.setState({
-          isAccess: res.data.isAccess
+          isAccess: res.data.isAccess,
+          role: res.data.role
         }))
       setTimeout(() => {
         if (this.state.isAccess) this.closeModal()
@@ -75,10 +79,8 @@ class App extends Component {
   render() {
     const { isModalOpen } = this.state
     return (
-      <>
+      <Router>
         <Nav openModalFn={this.openModal} />
-        <Header />
-        <Footer />
         {isModalOpen && <LoginPage
           closeModalFn={this.closeModal}
           closeClass={this.state.closeModalClass}
@@ -88,7 +90,10 @@ class App extends Component {
           password={this.state.password}
           onSubmit={this.onSubmit}
         />}
-      </>
+        <Route path='/' exact component={Header} />
+        <Route path='/register' component={registerPage} />
+        <Footer />
+      </Router>
     )
   }
 }
