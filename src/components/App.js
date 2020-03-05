@@ -5,6 +5,7 @@ import Header from './Header'
 import Footer from './Footer'
 import LoginPage from '../pages/loginPage'
 import registerPage from '../pages/registerPage'
+import EditPage from '../pages/editPage'
 import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -16,7 +17,8 @@ class App extends Component {
     login: '',
     password: '',
     isAccess: false,
-    role: ''
+    role: '',
+    id: ''
   }
 
   openModal = () => {
@@ -62,10 +64,13 @@ class App extends Component {
     }
 
     axios.post('http://localhost:5000/patient/login', patient)
-      .then(res => localStorage.setItem('TOKEN_ROOT', res.data))
+      .then(res => {
+        this.setState({ id: res.data.id })
+        localStorage.setItem('TOKEN_SECRET', res.data.token)
+      })
 
     setTimeout(() => {
-      axios.get('http://localhost:5000/patient/', { headers: { authorization: localStorage.TOKEN_ROOT } })
+      axios.get('http://localhost:5000/patient/', { headers: { authorization: localStorage.TOKEN_SECRET } })
         .then(res => this.setState({
           isAccess: res.data.isAccess,
           role: res.data.role
@@ -76,11 +81,22 @@ class App extends Component {
     }, 1000)
   }
 
+  handleLogout = () => {
+    localStorage.clear()
+
+    this.setState({
+      login: '',
+      password: '',
+      isAccess: false,
+      role: ''
+    })
+  }
+
   render() {
     const { isModalOpen } = this.state
     return (
       <Router>
-        <Nav openModalFn={this.openModal} />
+        <Nav openModalFn={this.openModal} handleLogout={this.handleLogout} isAccess={this.state.isAccess} role={this.state.role} />
         {isModalOpen && <LoginPage
           closeModalFn={this.closeModal}
           closeClass={this.state.closeModalClass}
@@ -92,6 +108,7 @@ class App extends Component {
         />}
         <Route path='/' exact component={Header} />
         <Route path='/register' component={registerPage} />
+        <Route path='/edit' component={() => <EditPage id={this.state.id} />} />
         <Footer />
       </Router>
     )
