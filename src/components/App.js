@@ -4,8 +4,9 @@ import Nav from './Nav'
 import Header from './Header'
 import Footer from './Footer'
 import LoginPage from '../pages/loginPage'
-import registerPage from '../pages/registerPage'
+import RegisterPage from '../pages/registerPage'
 import EditPage from '../pages/editPage'
+import DoctorsPage from '../pages/doctorsPage'
 import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
@@ -20,7 +21,8 @@ class App extends Component {
     role: '',
     id: '',
     isReceptionist: false,
-    path: ''
+    path: '',
+    doctors: []
   }
 
   openModal = () => {
@@ -123,6 +125,11 @@ class App extends Component {
     })
   }
 
+  componentDidMount() {
+    axios.get('http://localhost:5000/doctor')
+      .then(res => this.setState({ doctors: res.data }))
+  }
+
   render() {
     const { isModalOpen } = this.state
     return (
@@ -141,7 +148,8 @@ class App extends Component {
           path={this.state.path}
         />}
         <Route path='/' exact component={Header} />
-        <Route path='/register' component={registerPage} />
+        <Route path='/doctors' component={() => <DoctorsPage doctors={this.state.doctors} />} />
+        <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Footer />
       </Router>
