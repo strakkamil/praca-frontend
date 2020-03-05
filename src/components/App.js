@@ -18,7 +18,9 @@ class App extends Component {
     password: '',
     isAccess: false,
     role: '',
-    id: ''
+    id: '',
+    isReceptionist: false,
+    path: ''
   }
 
   openModal = () => {
@@ -58,27 +60,49 @@ class App extends Component {
 
     localStorage.clear()
 
-    const patient = {
+    const user = {
       email: this.state.login,
       password: this.state.password
     }
 
-    axios.post('http://localhost:5000/patient/login', patient)
-      .then(res => {
-        this.setState({ id: res.data.id })
-        localStorage.setItem('TOKEN_SECRET', res.data.token)
-      })
+    if (this.state.isReceptionist) {
+      axios.post('http://localhost:5000/receptionist/login', user)
+        .then(res => {
+          this.setState({ id: res.data.id })
+          localStorage.setItem('TOKEN_SECRET', res.data.token)
+        })
 
-    setTimeout(() => {
-      axios.get('http://localhost:5000/patient/', { headers: { authorization: localStorage.TOKEN_SECRET } })
-        .then(res => this.setState({
-          isAccess: res.data.isAccess,
-          role: res.data.role
-        }))
       setTimeout(() => {
-        if (this.state.isAccess) this.closeModal()
-      }, 500)
-    }, 1000)
+        axios.get('http://localhost:5000/receptionist', { headers: { authorization: localStorage.TOKEN_SECRET } })
+          .then(res => this.setState({
+            isAccess: res.data.isAccess,
+            role: res.data.role,
+            path: 'receptionist'
+          }))
+        setTimeout(() => {
+          if (this.state.isAccess) this.closeModal()
+        }, 500)
+      }, 1000)
+    }
+    if (!this.state.isReceptionist) {
+      axios.post('http://localhost:5000/patient/login', user)
+        .then(res => {
+          this.setState({ id: res.data.id })
+          localStorage.setItem('TOKEN_SECRET', res.data.token)
+        })
+
+      setTimeout(() => {
+        axios.get('http://localhost:5000/patient', { headers: { authorization: localStorage.TOKEN_SECRET } })
+          .then(res => this.setState({
+            isAccess: res.data.isAccess,
+            role: res.data.role,
+            path: 'patient'
+          }))
+        setTimeout(() => {
+          if (this.state.isAccess) this.closeModal()
+        }, 500)
+      }, 1000)
+    }
   }
 
   handleLogout = () => {
@@ -88,7 +112,14 @@ class App extends Component {
       login: '',
       password: '',
       isAccess: false,
-      role: ''
+      role: '',
+      id: ''
+    })
+  }
+
+  onChangeIsReceptionist = () => {
+    this.setState({
+      isReceptionist: !this.state.isReceptionist
     })
   }
 
@@ -105,10 +136,13 @@ class App extends Component {
           onChangePassword={this.onChangePassword}
           password={this.state.password}
           onSubmit={this.onSubmit}
+          isReceptionist={this.state.isReceptionist}
+          onChangeIsReceptionist={this.onChangeIsReceptionist}
+          path={this.state.path}
         />}
         <Route path='/' exact component={Header} />
         <Route path='/register' component={registerPage} />
-        <Route path='/edit' component={() => <EditPage id={this.state.id} />} />
+        <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Footer />
       </Router>
     )

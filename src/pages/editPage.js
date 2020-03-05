@@ -12,25 +12,39 @@ class editPage extends Component {
     pesel: '',
     city: '',
     street: '',
+    role: this.props.role
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/patient/edit/${this.props.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => this.setState({
-        firstname: res.data.firstname,
-        lastname: res.data.lastname,
-        email: res.data.email,
-        phone: res.data.phone,
-        pesel: res.data.pesel,
-        city: res.data.city,
-        street: res.data.street
-      }))
+    if (this.state.role === 'patient') {
+      axios.get(`http://localhost:5000/patient/edit/${this.props.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
+        .then(res => this.setState({
+          firstname: res.data.firstname,
+          lastname: res.data.lastname,
+          email: res.data.email,
+          phone: res.data.phone,
+          pesel: res.data.pesel,
+          city: res.data.city,
+          street: res.data.street
+        }))
+    } else if (this.state.role === 'admin') {
+      axios.get(`http://localhost:5000/receptionist/edit/${this.props.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
+        .then(res => this.setState({
+          firstname: res.data.firstname,
+          lastname: res.data.lastname,
+          email: res.data.email,
+          phone: res.data.phone,
+          pesel: res.data.pesel,
+          city: res.data.city,
+          street: res.data.street
+        }))
+    }
   }
 
   onSubmit = (e) => {
     e.preventDefault()
 
-    const patient = {
+    const user = {
       firstname: this.state.firstname,
       lastname: this.state.lastname,
       email: this.state.email,
@@ -40,8 +54,10 @@ class editPage extends Component {
       street: this.state.street
     }
 
-    axios.patch(`http://localhost:5000/patient/edit/${this.props.id}`, patient)
-      .then(res => console.log(patient))
+    axios.patch(`http://localhost:5000/patient/edit/${this.props.id}`, user)
+      .then(res => console.log(user))
+
+
   }
 
   onChange = (type, e) => {
@@ -79,16 +95,6 @@ class editPage extends Component {
       case 'street':
         this.setState({
           street: e.target.value
-        })
-        break
-      case 'password':
-        this.setState({
-          password: e.target.value
-        })
-        break
-      case 'confirmPassword':
-        this.setState({
-          confirmPassword: e.target.value
         })
         break
       default:
@@ -149,7 +155,7 @@ class editPage extends Component {
                 </label>
               </div>
               <div className="button">
-                <button type="submit">Rejestruj </button>
+                <button type="submit">Edytuj dane</button>
                 <Link to='/'>Powrót</Link>
               </div>
             </div>
