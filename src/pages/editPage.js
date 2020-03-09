@@ -54,9 +54,13 @@ class editPage extends Component {
       street: this.state.street
     }
 
-    axios.patch(`http://localhost:5000/patient/edit/${this.props.id}`, user)
-      .then(res => console.log(user))
-
+    if (this.state.role === 'patient') {
+      axios.patch(`http://localhost:5000/patient/edit/${this.props.id}`, user)
+        .then(res => console.log(user))
+    } else if (this.state.role === 'admin') {
+      axios.patch(`http://localhost:5000/receptionist/edit/${this.props.id}`, user)
+        .then(res => console.log(user))
+    }
 
   }
 

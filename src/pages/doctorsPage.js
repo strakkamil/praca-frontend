@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import '../styles/doctorsPage.css'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import DoctorCard from '../components/DoctorCard'
 
 class doctorsPage extends Component {
   state = {
@@ -16,22 +17,27 @@ class doctorsPage extends Component {
   componentDidMount() {
     this.getDoctors()
   }
+
+  componentDidUpdate() {
+    this.getDoctors()
+  }
   render() {
-    const doctors = this.state.doctors.map(doctor => (
-      <div className="doctor" key={doctor._id}>
-        <span>Imię: {doctor.firstname}</span>
-        <span>Nazwisko: {doctor.lastname}</span>
-        <span>Specjalizacja: {doctor.specialization}</span>
-      </div>
+    const doctorCard = this.state.doctors.map(doctor => (
+      <DoctorCard key={doctor._id} id={doctor._id} name={doctor.firstname} surname={doctor.lastname} specialization={doctor.specialization} role={this.props.role} />
     ))
     return (
-      <div className="doctors" >
-        <div className="nav"></div>
-        <div className="panel">
-          {this.props.role === 'admin' && <Link to='/doctors/register'>Dodaj lekarza</Link>}
+      <>
+        {this.props.role === 'admin' ?
+          <div className="panel"><Link to='/doctors/register'>Dodaj lekarza</Link></div> :
+          this.props.role === 'patient' ? <div className="panel"><Link to='/patient/visits'>Moje wizyty</Link></div> :
+            <div className="panel"><h1>Aby przejrzeć wizyty musisz się zalogować</h1></div>
+        }
+        <div className="doctors">
+          <div className="cards">
+            {doctorCard}
+          </div>
         </div>
-        {doctors}
-      </div>
+      </>
     )
   }
 }

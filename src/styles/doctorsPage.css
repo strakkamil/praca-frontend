@@ -1,10 +1,10 @@
 .doctors{
   height: 100vh;
   width: 100%;
-
+  margin-top: 20px;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
 }
 
@@ -22,28 +22,27 @@
   display: block;
 }
 
-.doctors .panel{
+.doctors .cards{
   display: flex;
-  margin-top: 10vh;
-  height: 10vh;
-  align-self: flex-start;
-  justify-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
 }
 
-.doctors .panel a{
-  display: inline-block;
-  margin: 20px;
-  height: 50px;
-  width: 180px;
-  font-size: 20px;
-  background-color: white;
+.panel{
+  display: flex;
+  padding-top: 10vh;
+  height: 200px;
+  justify-content: center;
+  align-items: center;
+}
+
+.panel a{
   border: 2px solid rgb(41,84,108);
   border-radius: 10px;
-  transition: .2s;
-  cursor: pointer;
 }
 
-.doctors .panel a:hover{
-  background-color: rgb(41,84,108);
+.panel a:hover{
+  background-color: rgb(41,84,108) ;
   color: white;
 }
+
