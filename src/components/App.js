@@ -10,6 +10,7 @@ import DoctorsPage from '../pages/doctorsPage'
 import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import RegisterDoctor from '../pages/registerDoctors'
+import DoctorEditPage from '../pages/doctorEditPage'
 
 
 class App extends Component {
@@ -22,6 +23,15 @@ class App extends Component {
     role: '',
     id: '',
     isReceptionist: false,
+    doctorId: '',
+    doctors: []
+  }
+
+  getDoctorId = (id) => {
+    const doctorId = id
+    this.setState({
+      doctorId
+    })
   }
 
   openModal = () => {
@@ -141,10 +151,11 @@ class App extends Component {
           onChangeIsReceptionist={this.onChangeIsReceptionist}
         />}
         <Route path='/' exact component={Header} />
-        <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} />} />
+        <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} getDoctorId={this.getDoctorId} />} />
         <Route path='/doctors/register' component={() => <RegisterDoctor getDoctors={this.getDoctors} />} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
+        <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} />} />
         <Footer />
       </Router>
     )

@@ -10,20 +10,16 @@ class doctorsPage extends Component {
   }
 
   getDoctors = () => {
-    axios.get('http://localhost:5000/doctor')
+    axios.get('http://localhost:5000/doctor', { headers: { authorization: localStorage.TOKEN_SECRET } })
       .then(res => this.setState({ doctors: res.data }))
   }
 
   componentDidMount() {
     this.getDoctors()
   }
-
-  componentDidUpdate() {
-    this.getDoctors()
-  }
   render() {
     const doctorCard = this.state.doctors.map(doctor => (
-      <DoctorCard key={doctor._id} id={doctor._id} name={doctor.firstname} surname={doctor.lastname} specialization={doctor.specialization} role={this.props.role} />
+      <DoctorCard key={doctor._id} id={doctor._id} name={doctor.firstname} surname={doctor.lastname} specialization={doctor.specialization} role={this.props.role} getDoctorId={this.props.getDoctorId} />
     ))
     return (
       <>
