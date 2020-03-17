@@ -23,6 +23,7 @@ class App extends Component {
     role: '',
     id: '',
     isReceptionist: false,
+    isDoctor: false,
     doctorId: '',
     doctors: []
   }
@@ -95,7 +96,26 @@ class App extends Component {
         }, 500)
       }, 1000)
     }
-    if (!this.state.isReceptionist) {
+    if (this.state.isDoctor) {
+      axios.post('http://localhost:5000/doctor/login', user)
+        .then(res => {
+          this.setState({ id: res.data.id })
+          localStorage.setItem('TOKEN_SECRET', res.data.token)
+        })
+
+      setTimeout(() => {
+        axios.get('http://localhost:5000/doctor/login', { headers: { authorization: localStorage.TOKEN_SECRET } })
+          .then(res => this.setState({
+            isAccess: res.data.isAccess,
+            role: res.data.role,
+            path: 'doctor'
+          }))
+        setTimeout(() => {
+          if (this.state.isAccess) this.closeModal()
+        }, 500)
+      }, 1000)
+    }
+    if (!this.state.isReceptionist && !this.state.isDoctor) {
       axios.post('http://localhost:5000/patient/login', user)
         .then(res => {
           this.setState({ id: res.data.id })
@@ -130,7 +150,15 @@ class App extends Component {
 
   onChangeIsReceptionist = () => {
     this.setState({
-      isReceptionist: !this.state.isReceptionist
+      isReceptionist: !this.state.isReceptionist,
+      isDoctor: false
+    })
+  }
+
+  onChangeIsDoctor = () => {
+    this.setState({
+      isDoctor: !this.state.isDoctor,
+      isReceptionist: false
     })
   }
 
@@ -149,6 +177,8 @@ class App extends Component {
           onSubmit={this.onSubmit}
           isReceptionist={this.state.isReceptionist}
           onChangeIsReceptionist={this.onChangeIsReceptionist}
+          isDoctor={this.state.isDoctor}
+          onChangeIsDoctor={this.onChangeIsDoctor}
         />}
         <Route path='/' exact component={Header} />
         <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} getDoctorId={this.getDoctorId} />} />

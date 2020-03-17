@@ -25,6 +25,10 @@ class loginPage extends Component {
             <input type="checkbox" checked={this.props.isReceptionist} onChange={this.props.onChangeIsReceptionist} />
             <span className="checkmark"></span>
           </label>
+          <label className='container'>Lekarz
+            <input type="checkbox" checked={this.props.isDoctor} onChange={this.props.onChangeIsDoctor} />
+            <span className="checkmark"></span>
+          </label>
           <div className="button">
             <button type="submit">Login</button>
             <button onClick={this.props.closeModalFn}>Zamknij</button>
