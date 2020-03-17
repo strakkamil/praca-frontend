@@ -1,0 +1,11 @@
+.doctors-main{
+  height: 40vh;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.doctors-main-h1{
+  text-align: center;
+  margin-top: 6vh;
+}

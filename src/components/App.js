@@ -11,6 +11,7 @@ import axios from 'axios'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import RegisterDoctor from '../pages/registerDoctors'
 import DoctorEditPage from '../pages/doctorEditPage'
+import MainDoctors from '../components/mainDoctors'
 
 
 class App extends Component {
@@ -26,6 +27,13 @@ class App extends Component {
     isDoctor: false,
     doctorId: '',
     doctors: []
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/doctor/main')
+      .then(res => this.setState({
+        doctors: res.data
+      }))
   }
 
   getDoctorId = (id) => {
@@ -181,6 +189,7 @@ class App extends Component {
           onChangeIsDoctor={this.onChangeIsDoctor}
         />}
         <Route path='/' exact component={Header} />
+        <Route path='/' exact component={() => <MainDoctors doctors={this.state.doctors} />} />
         <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} getDoctorId={this.getDoctorId} />} />
         <Route path='/doctors/register' component={() => <RegisterDoctor getDoctors={this.getDoctors} />} />
         <Route path='/register' component={RegisterPage} />

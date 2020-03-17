@@ -17,7 +17,7 @@ class DoctorCard extends Component {
         <span>{this.props.surname}</span>
         <span className="description">{this.props.specialization}</span>
         <FA name="fas fa-user-md" className='icon' />
-        {this.props.role === 'admin' ? <><Link to='/doctors/edit' onClick={() => this.props.getDoctorId(this.props.id)}>Edytuj</Link><button onClick={this.deleteDoctor}>Usuń</button></> : <button>Zapisz</button>}
+        {this.props.role === 'admin' ? <><Link to='/doctors/edit' onClick={() => this.props.getDoctorId(this.props.id)}>Edytuj</Link><button onClick={this.deleteDoctor}>Usuń</button></> : this.props.role === 'patient' ? <button>Zapisz</button> : null}
       </div>
     )
   }
