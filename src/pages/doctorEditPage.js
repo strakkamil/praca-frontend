@@ -156,7 +156,7 @@ class editPage extends Component {
               </div>
               <div className="button">
                 <button onClick={this.onSubmit}>Edytuj dane</button>
-                <Link to='/doctors'>Powrót</Link>
+                <Link to='/doctor'>Powrót</Link>
               </div>
             </div>
           </form>

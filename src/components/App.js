@@ -12,6 +12,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import RegisterDoctor from '../pages/registerDoctors'
 import DoctorEditPage from '../pages/doctorEditPage'
 import MainDoctors from '../components/mainDoctors'
+import DoctorPanel from '../components/doctorPanel'
 
 
 class App extends Component {
@@ -152,7 +153,9 @@ class App extends Component {
       password: '',
       isAccess: false,
       role: '',
-      id: ''
+      id: '',
+      isDoctor: false,
+      isReceptionist: false
     })
   }
 
@@ -174,7 +177,13 @@ class App extends Component {
     const { isModalOpen } = this.state
     return (
       <Router>
-        <Nav openModalFn={this.openModal} handleLogout={this.handleLogout} isAccess={this.state.isAccess} role={this.state.role} />
+        <Nav
+          openModalFn={this.openModal}
+          handleLogout={this.handleLogout}
+          isAccess={this.state.isAccess}
+          role={this.state.role}
+          isDoctor={this.state.isDoctor}
+        />
         {isModalOpen && <LoginPage
           closeModalFn={this.closeModal}
           closeClass={this.state.closeModalClass}
@@ -194,7 +203,8 @@ class App extends Component {
         <Route path='/doctors/register' component={() => <RegisterDoctor getDoctors={this.getDoctors} />} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
-        <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} />} />
+        <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.id} />} />
+        <Route path='/doctor' exact component={DoctorPanel} />
         <Footer />
       </Router>
     )

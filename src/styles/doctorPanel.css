@@ -1,0 +1,14 @@
+.doctor-panel{
+  padding-top: 10vh;
+  height: 100vh;
+}
+
+.doctor-panel a{
+  border: 2px solid rgb(41,84,108);
+  border-radius: 10px;
+}
+
+.doctor-panel a:hover{
+  background-color: rgb(41,84,108) ;
+  color: white;
+}

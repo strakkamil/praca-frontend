@@ -16,7 +16,7 @@ const Nav = props => {
       return (
         <>
           <li><NavLink to="/" onClick={props.handleLogout}>Wyloguj</NavLink></li>
-          <li><NavLink to="/edit">Moje dane</NavLink></li>
+          {props.isDoctor ? <li><NavLink to="/doctors/edit">Moje dane</NavLink></li> : <li><NavLink to="/edit">Moje dane</NavLink></li>}
         </>
       )
     }
@@ -27,7 +27,7 @@ const Nav = props => {
       <ul>
         <li><NavLink to="/about">O nas</NavLink></li>
         <li><NavLink to="/tests">Badania</NavLink></li>
-        <li><NavLink to="/doctors">Lekarze</NavLink></li>
+        {props.isDoctor ? <li><NavLink to="/doctor">Lekarze</NavLink></li> : <li><NavLink to="/doctors">Lekarze</NavLink></li>}
         {check()}
       </ul>
     </nav>
