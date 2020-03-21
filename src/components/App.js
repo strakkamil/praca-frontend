@@ -14,6 +14,7 @@ import DoctorEditPage from '../pages/doctorEditPage'
 import MainDoctors from '../components/mainDoctors'
 import DoctorPanel from '../components/doctorPanel'
 import About from '../components/About'
+import AddVisitPage from '../pages/addVisitPage'
 
 
 class App extends Component {
@@ -205,13 +206,14 @@ class App extends Component {
         />}
         <Route path='/' exact component={Header} />
         <Route path='/' exact component={() => <MainDoctors doctors={this.state.doctors} />} />
-        <Route path='/' exact component={() => <About onClick={this.onClickMapOpen} />} />
         <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} getDoctorId={this.getDoctorId} />} />
         <Route path='/doctors/register' component={() => <RegisterDoctor getDoctors={this.getDoctors} />} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} doctorId={this.state.id} isDoctor={this.state.isDoctor} />} />
         <Route path='/doctor' exact component={DoctorPanel} />
+        <Route path='/visits/add' component={AddVisitPage} />
+        <About onClick={this.onClickMapOpen} />
         <Footer />
       </Router>
     )

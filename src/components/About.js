@@ -5,7 +5,7 @@ import { faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons'
 
 const About = (props) => {
   return (
-    <div className="about-container">
+    <div className="about-container" id='about'>
       <div className="map" onClick={props.onClick}>
         <div className="map-image">
         </div>

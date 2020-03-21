@@ -2,6 +2,7 @@ import React from 'react'
 import '../styles/Nav.css'
 import logo from '../images/logo.png'
 import { NavLink } from 'react-router-dom'
+import { Link as ScrollLink } from 'react-scroll'
 
 const Nav = props => {
   const check = () => {
@@ -25,7 +26,7 @@ const Nav = props => {
     <nav>
       <img src={logo} alt="logo" /><span>Ka-Med</span>
       <ul>
-        <li><NavLink to="/about">O nas</NavLink></li>
+        <li><ScrollLink to='about' smooth={true} duration={1000}>O nas</ScrollLink></li>
         <li><NavLink to="/tests">Badania</NavLink></li>
         {props.isDoctor ? <li><NavLink to="/doctor">Lekarze</NavLink></li> : <li><NavLink to="/doctors">Lekarze</NavLink></li>}
         {check()}

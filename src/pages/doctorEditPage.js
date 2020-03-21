@@ -29,18 +29,19 @@ class editPage extends Component {
           street: res.data.street,
           specialization: res.data.specialization
         }))
+    } else {
+      axios.get(`http://localhost:5000/doctor/edit/${this.props.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
+        .then(res => this.setState({
+          firstname: res.data.firstname,
+          lastname: res.data.lastname,
+          email: res.data.email,
+          phone: res.data.phone,
+          pesel: res.data.pesel,
+          city: res.data.city,
+          street: res.data.street,
+          specialization: res.data.specialization
+        }))
     }
-    axios.get(`http://localhost:5000/doctor/edit/${this.props.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => this.setState({
-        firstname: res.data.firstname,
-        lastname: res.data.lastname,
-        email: res.data.email,
-        phone: res.data.phone,
-        pesel: res.data.pesel,
-        city: res.data.city,
-        street: res.data.street,
-        specialization: res.data.specialization
-      }))
   }
 
   onSubmit = (e) => {
@@ -60,9 +61,10 @@ class editPage extends Component {
     if (this.props.isDoctor) {
       axios.patch(`http://localhost:5000/doctor/edit/${this.props.doctorId}`, user, { headers: { authorization: localStorage.TOKEN_SECRET } })
         .then(res => console.log(user))
+    } else {
+      axios.patch(`http://localhost:5000/doctor/edit/${this.props.id}`, user, { headers: { authorization: localStorage.TOKEN_SECRET } })
+        .then(res => console.log(user))
     }
-    axios.patch(`http://localhost:5000/doctor/edit/${this.props.id}`, user, { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => console.log(user))
   }
 
   onChange = (type, e) => {

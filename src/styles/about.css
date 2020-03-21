@@ -10,6 +10,13 @@
   position: relative;
   max-width: 50%;
   overflow: hidden;
+  box-shadow: 0 15px 30px -10px #818181;
+  transform: scale(1);
+  transition: .3s;
+}
+
+.map:hover{
+  transform: scale(1.05);
 }
 
 .about{
@@ -18,6 +25,7 @@
   width: 50%;
   letter-spacing: 1px;
   align-items: center;
+  justify-content: center;
 }
 
 .about span, h2{
@@ -26,6 +34,7 @@
 
 .map-image{
   background-image: url('../images/mapa.png');
+  background-position: center;
   width: 600px;
   height: 600px;
 }
@@ -35,8 +44,8 @@
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0);
-  width: 600px;
-  height: 600px;
+  width: 100%;
+  height: 100%;
   transition: .3s;
   cursor: pointer;
 }
