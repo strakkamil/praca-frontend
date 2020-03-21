@@ -13,6 +13,7 @@ import RegisterDoctor from '../pages/registerDoctors'
 import DoctorEditPage from '../pages/doctorEditPage'
 import MainDoctors from '../components/mainDoctors'
 import DoctorPanel from '../components/doctorPanel'
+import About from '../components/About'
 
 
 class App extends Component {
@@ -155,7 +156,8 @@ class App extends Component {
       role: '',
       id: '',
       isDoctor: false,
-      isReceptionist: false
+      isReceptionist: false,
+      doctorId: ''
     })
   }
 
@@ -171,6 +173,10 @@ class App extends Component {
       isDoctor: !this.state.isDoctor,
       isReceptionist: false
     })
+  }
+
+  onClickMapOpen = () => {
+    window.open('https://www.google.pl/maps/place/Plac+Corazziego/@51.4009817,21.1556939,17z/data=!3m1!4b1!4m5!3m4!1s0x47185fe2edfddc4b:0xf17fa83ca64af933!8m2!3d51.4009784!4d21.1578826')
   }
 
   render() {
@@ -199,11 +205,12 @@ class App extends Component {
         />}
         <Route path='/' exact component={Header} />
         <Route path='/' exact component={() => <MainDoctors doctors={this.state.doctors} />} />
+        <Route path='/' exact component={() => <About onClick={this.onClickMapOpen} />} />
         <Route path='/doctors' exact component={() => <DoctorsPage role={this.state.role} getDoctorId={this.getDoctorId} />} />
         <Route path='/doctors/register' component={() => <RegisterDoctor getDoctors={this.getDoctors} />} />
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
-        <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.id} />} />
+        <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} doctorId={this.state.id} isDoctor={this.state.isDoctor} />} />
         <Route path='/doctor' exact component={DoctorPanel} />
         <Footer />
       </Router>
