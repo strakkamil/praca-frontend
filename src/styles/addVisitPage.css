@@ -1,4 +1,32 @@
 .add-visit{
-  padding-top: 10vh;
+  padding-top: 12vh;
+  width: 100vw;
   height: 100vh;
+  text-align: center;
+}
+
+.add-visit span{
+  margin-top: 40px;
+  display: block;
+  font-size: 18px;
+}
+
+.buttons-group{
+  display: block;
+}
+
+.add-visit a{
+  margin: 20px auto;
+  border: 2px solid rgb(41,84,108);
+  border-radius: 10px;
+}
+
+.add-visit a:hover{
+  background-color: rgb(41,84,108) ;
+  color: white;
+}
+
+.add-visit .alert{
+  margin: 15px auto;
+  width: 30vw;
 }
