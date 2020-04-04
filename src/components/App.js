@@ -211,8 +211,8 @@ class App extends Component {
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} doctorId={this.state.id} isDoctor={this.state.isDoctor} />} />
-        <Route path='/doctor' exact component={DoctorPanel} />
-        <Route path='/visits/add' component={AddVisitPage} />
+        <Route path='/doctor' exact component={() => <DoctorPanel id={this.state.id}></DoctorPanel>} />
+        <Route path='/visits/add' component={() => <AddVisitPage id={this.state.id}></AddVisitPage>} />
         <About onClick={this.onClickMapOpen} />
         <Footer />
       </Router>

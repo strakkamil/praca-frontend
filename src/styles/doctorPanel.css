@@ -1,6 +1,7 @@
 .doctor-panel{
   padding-top: 10vh;
-  height: 100vh;
+  min-height: 100vh;
+  display: flex;
 }
 
 .doctor-panel a{
@@ -11,4 +12,18 @@
 .doctor-panel a:hover{
   background-color: rgb(41,84,108) ;
   color: white;
+}
+
+.cards{
+  margin: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.link{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  text-align: center;
 }
