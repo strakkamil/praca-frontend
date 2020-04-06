@@ -2,6 +2,7 @@
   padding-top: 10vh;
   min-height: 100vh;
   display: flex;
+  justify-content: center;
 }
 
 .doctor-panel a{

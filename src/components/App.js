@@ -15,6 +15,7 @@ import MainDoctors from '../components/mainDoctors'
 import DoctorPanel from '../components/doctorPanel'
 import About from '../components/About'
 import AddVisitPage from '../pages/addVisitPage'
+import DoctorVisitPage from '../pages/doctorVisitPage'
 
 
 class App extends Component {
@@ -29,7 +30,8 @@ class App extends Component {
     isReceptionist: false,
     isDoctor: false,
     doctorId: '',
-    doctors: []
+    doctors: [],
+    specialization: ''
   }
 
   componentDidMount() {
@@ -110,7 +112,10 @@ class App extends Component {
     if (this.state.isDoctor) {
       axios.post('http://localhost:5000/doctor/login', user)
         .then(res => {
-          this.setState({ id: res.data.id })
+          this.setState({
+            id: res.data.id,
+            specialization: res.data.specialization
+          })
           localStorage.setItem('TOKEN_SECRET', res.data.token)
         })
 
@@ -212,7 +217,8 @@ class App extends Component {
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} doctorId={this.state.id} isDoctor={this.state.isDoctor} />} />
         <Route path='/doctor' exact component={() => <DoctorPanel id={this.state.id}></DoctorPanel>} />
-        <Route path='/visits/add' component={() => <AddVisitPage id={this.state.id}></AddVisitPage>} />
+        <Route path='/visits/add' component={() => <AddVisitPage id={this.state.id} specialization={this.state.specialization} ></AddVisitPage>} />
+        <Route path='/doctor/visits' component={() => <DoctorVisitPage id={this.state.doctorId} patientId={this.state.id}></DoctorVisitPage>} />
         <About onClick={this.onClickMapOpen} />
         <Footer />
       </Router>

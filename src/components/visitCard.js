@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import '../styles/DoctorCard.css'
+import { Link } from 'react-router-dom'
 
 class visitCard extends Component {
   state = {
@@ -41,7 +42,7 @@ class visitCard extends Component {
         <span>{this.state.date}</span>
         <span>{this.state.hour}</span>
         <span className="description">{this.props.patientId ? this.props.description : 'Nikt się nie zapisał na wizyte'} </span>
-        {/* {this.props.role === 'admin' ? <><Link to='/doctors/edit' onClick={() => this.props.getDoctorId(this.props.id)}>Edytuj</Link><button onClick={this.deleteDoctor}>Usuń</button></> : this.props.role === 'patient' ? <button>Zapisz</button> : null} */}
+        {!this.props.patientId && <Link to='patient/visit' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link>}
       </div>
     )
   }

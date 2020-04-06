@@ -18,7 +18,8 @@ class DoctorCard extends Component {
         <span>{this.props.surname}</span>
         <span className="description">{this.props.specialization}</span>
         <FontAwesomeIcon icon={faUserMd} className="icon" />
-        {this.props.role === 'admin' ? <><Link to='/doctors/edit' onClick={() => this.props.getDoctorId(this.props.id)}>Edytuj</Link><button onClick={this.deleteDoctor}>Usuń</button></> : this.props.role === 'patient' ? <button>Zapisz</button> : null}
+        {this.props.role === 'admin' ? <><Link to='/doctors/edit' onClick={() => this.props.getDoctorId(this.props.id)}>Edytuj</Link><button onClick={this.deleteDoctor}>Usuń</button></> : this.props.role === 'patient' ? <Link to='doctor/visits'
+          onClick={() => this.props.getDoctorId(this.props.id)}>Zapisz</Link> : null}
       </div>
     )
   }

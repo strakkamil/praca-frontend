@@ -13,7 +13,8 @@ class addVisitPage extends Component {
     selectedStartTime: '',
     selectedEndTime: '',
     error: false,
-    doctorId: this.props.id
+    doctorId: this.props.id,
+    specialization: this.props.specialization
   }
 
   componentDidMount() {
@@ -59,7 +60,8 @@ class addVisitPage extends Component {
         doctorId: this.state.doctorId,
         selectedDate: this.state.selectedDate,
         selectedStartTime: this.state.selectedStartTime,
-        selectedEndTime: this.state.selectedEndTime
+        selectedEndTime: this.state.selectedEndTime,
+        specialization: this.state.specialization
       }
       this.setState({
         error: false

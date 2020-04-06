@@ -1,0 +1,10 @@
+.visit-page{
+  min-height: 100vh;
+}
+
+.doctor-visit-page{
+  width: 100%;
+  padding-top: 10vh;
+  display: flex;
+  justify-content: center;
+}
