@@ -16,7 +16,7 @@ import DoctorPanel from '../components/doctorPanel'
 import About from '../components/About'
 import AddVisitPage from '../pages/addVisitPage'
 import DoctorVisitPage from '../pages/doctorVisitPage'
-
+import PatientVisits from '../pages/patientVisits'
 
 class App extends Component {
   state = {
@@ -219,6 +219,7 @@ class App extends Component {
         <Route path='/doctor' exact component={() => <DoctorPanel id={this.state.id}></DoctorPanel>} />
         <Route path='/visits/add' component={() => <AddVisitPage id={this.state.id} specialization={this.state.specialization} ></AddVisitPage>} />
         <Route path='/doctor/visits' component={() => <DoctorVisitPage id={this.state.doctorId} patientId={this.state.id}></DoctorVisitPage>} />
+        <Route path='/patient/visits' component={() => <PatientVisits id={this.state.id} />} />
         <About onClick={this.onClickMapOpen} />
         <Footer />
       </Router>

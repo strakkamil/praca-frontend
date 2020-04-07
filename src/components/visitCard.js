@@ -41,8 +41,8 @@ class visitCard extends Component {
       <div className='card'>
         <span>{this.state.date}</span>
         <span>{this.state.hour}</span>
-        <span className="description">{this.props.patientId ? this.props.description : 'Nikt się nie zapisał na wizyte'} </span>
-        {!this.props.patientId && <Link to='patient/visit' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link>}
+        {/* <span className="description">{this.props.patientId ? this.props.description : 'Nikt się nie zapisał na wizyte'} </span> */}
+        {!this.props.patientId ? <Link to='/patient/visits' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link> : <Link to='patient/visit/edit'>Otwórz</Link>}
       </div>
     )
   }

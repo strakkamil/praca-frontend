@@ -10,10 +10,19 @@ class doctorVisitPage extends Component {
   }
 
   componentDidMount() {
-    axios.get(`http://localhost:5000/visit/doctor/${this.state.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => this.setState({
-        visits: res.data
-      }))
+    this.getVisits()
+  }
+
+  getVisits = async () => {
+    const res = await axios.get(`http://localhost:5000/visit/doctor/${this.state.id}`, { headers: { authorization: localStorage.TOKEN_SECRET } })
+    this.setState({
+      visits: res.data
+    })
+    const visits = [...this.state.visits]
+    const filtredVisits = visits.filter(visit => visit.patientId === '')
+    this.setState({
+      visits: filtredVisits
+    })
   }
 
   signUpToDoctor = (id) => {
