@@ -18,7 +18,7 @@ class doctorPanel extends Component {
 
   render() {
     const visits = this.state.visits.map(visit => (
-      <VisitCard key={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} />
+      <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} isDoctor={this.props.isDoctor} getVisitId={this.props.getVisitId} />
     ))
     return (
       <div className="doctor-panel">

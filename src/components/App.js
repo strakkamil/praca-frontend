@@ -17,6 +17,7 @@ import About from '../components/About'
 import AddVisitPage from '../pages/addVisitPage'
 import DoctorVisitPage from '../pages/doctorVisitPage'
 import PatientVisits from '../pages/patientVisits'
+import VisitPanel from '../pages/visitPanel'
 
 class App extends Component {
   state = {
@@ -31,7 +32,8 @@ class App extends Component {
     isDoctor: false,
     doctorId: '',
     doctors: [],
-    specialization: ''
+    specialization: '',
+    visitId: ''
   }
 
   componentDidMount() {
@@ -185,6 +187,13 @@ class App extends Component {
     window.open('https://www.google.pl/maps/place/Plac+Corazziego/@51.4009817,21.1556939,17z/data=!3m1!4b1!4m5!3m4!1s0x47185fe2edfddc4b:0xf17fa83ca64af933!8m2!3d51.4009784!4d21.1578826')
   }
 
+  getVisitId = (visitId) => {
+    this.setState({
+      visitId
+    })
+    console.log(this.state.visitId)
+  }
+
   render() {
     const { isModalOpen } = this.state
     return (
@@ -216,10 +225,11 @@ class App extends Component {
         <Route path='/register' component={RegisterPage} />
         <Route path='/edit' component={() => <EditPage id={this.state.id} role={this.state.role} />} />
         <Route path='/doctors/edit' component={() => <DoctorEditPage id={this.state.doctorId} doctorId={this.state.id} isDoctor={this.state.isDoctor} />} />
-        <Route path='/doctor' exact component={() => <DoctorPanel id={this.state.id}></DoctorPanel>} />
+        <Route path='/doctor' exact component={() => <DoctorPanel id={this.state.id} isDoctor={this.state.isDoctor} getVisitId={this.getVisitId}></DoctorPanel>} />
         <Route path='/visits/add' component={() => <AddVisitPage id={this.state.id} specialization={this.state.specialization} ></AddVisitPage>} />
-        <Route path='/doctor/visits' component={() => <DoctorVisitPage id={this.state.doctorId} patientId={this.state.id}></DoctorVisitPage>} />
-        <Route path='/patient/visits' component={() => <PatientVisits id={this.state.id} />} />
+        <Route path='/doctor/visits' component={() => <DoctorVisitPage id={this.state.doctorId} patientId={this.state.id} isDoctor={this.state.isDoctor}></DoctorVisitPage>} />
+        <Route path='/patient/visits' component={() => <PatientVisits id={this.state.id} getVisitId={this.getVisitId} />} />
+        <Route path={['/doctor/visit/edit', '/patient/visit']} component={VisitPanel} />
         <About onClick={this.onClickMapOpen} />
         <Footer />
       </Router>

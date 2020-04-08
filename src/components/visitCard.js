@@ -36,13 +36,36 @@ class visitCard extends Component {
     })
   }
 
+  checkIsDoctor = () => {
+    if (this.props.patientId && this.props.isDoctor) {
+      return (
+        <Link to='/doctor/visit/edit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
+      )
+    } else if (!this.props.patientId && this.props.isDoctor) {
+      return (
+        <span>Nikt się nie zapisał</span>
+      )
+    } else if (this.props.isPatient) {
+      return (
+        <>
+          <span>{this.props.specialization}</span>
+          <Link to='/patient/visit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
+        </>
+      )
+    }
+    else {
+      return (
+        <Link to='/patient/visits' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link>
+      )
+    }
+  }
+
   render() {
     return (
       <div className='card'>
         <span>{this.state.date}</span>
         <span>{this.state.hour}</span>
-        {/* <span className="description">{this.props.patientId ? this.props.description : 'Nikt się nie zapisał na wizyte'} </span> */}
-        {!this.props.patientId ? <Link to='/patient/visits' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link> : <Link to='patient/visit/edit'>Otwórz</Link>}
+        {this.checkIsDoctor()}
       </div>
     )
   }
