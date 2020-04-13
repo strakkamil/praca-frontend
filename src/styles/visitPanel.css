@@ -1,5 +1,61 @@
 .visit-panel{
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-height: 100vh;
+}
+
+.visit-panel-card{
+  display: flex;
+  align-content: center;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  padding: 10vh;
+  border-radius: 20px;
+  box-shadow: 0 15px 30px -10px #818181;
+  width: 50%;
+}
+
+.visit-panel h1{
   width: 100%;
-  padding-top: 10vh;
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.visit-panel .left{
+  width: 50%;
+  text-align: center;
+}
+
+.visit-panel .right{
+  width: 50%;
+  text-align: center;
+}
+
+.visit-panel span{
+  display: block;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color:rgb(41,84,108) ;
+}
+
+.visit-panel h2{
+  margin-bottom: 10px;
+}
+
+.visit-panel-card .edit-description{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.visit-panel-card .edit-description a {
+  border: 2px solid rgb(41,84,108);
+  border-radius: 10px;
+}
+
+.visit-panel-card .edit-description a:hover{
+  background-color: rgb(41,84,108) ;
+  color: white;
 }

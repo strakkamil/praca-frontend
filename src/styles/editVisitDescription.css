@@ -1,0 +1,47 @@
+.edit-field-description{ 
+  width: 60vw;
+  min-height: 100vh;
+  padding-top: 15vh;
+  margin: 0 auto;
+}
+
+.edit-field-description h1{
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.edit-field-description .buttons{
+  text-align: center;
+}
+
+.edit-field-description a{
+  display: inline-block;
+  margin: 0 auto;
+  margin-top: 50px;
+  border: 2px solid rgb(41,84,108);
+  border-radius: 10px;
+}
+
+.edit-field-description a:hover{
+  background-color: rgb(41,84,108) ;
+  color: white;
+}
+
+.edit-field-description button{
+  padding: 10px;
+  margin: 10px;
+  width: 150px;
+  text-align: center;
+  color: black;
+  font-size: 18px;
+  border: 2px solid rgb(41,84,108);
+  background-color: white;
+  border-radius: 10px;
+  transition: .2s;
+  cursor: pointer;
+}
+
+.edit-field-description button:hover{
+  background-color: rgb(41,84,108) ;
+  color: white;
+}
