@@ -29,14 +29,12 @@ class doctorVisitPage extends Component {
     const visit = {
       patientId: this.props.patientId
     }
-    console.log(id)
     axios.patch(`http://localhost:5000/visit/signup/${id}`, visit, { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => console.log('zmodyfikowano'))
   }
 
   render() {
     const visits = this.state.visits.map(visit => (
-      <VisitCard key={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} signup={this.signUpToDoctor} />
+      <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} signup={this.signUpToDoctor} />
     ))
     return (
       <div className="visit-page">

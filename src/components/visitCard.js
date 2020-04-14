@@ -50,6 +50,7 @@ class visitCard extends Component {
         <>
           <span>{this.props.specialization}</span>
           <Link to='/patient/visit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
+          <Link to='/patient/visits' onClick={() => this.props.cancelVisit(this.props.id)}>Zrezygnuj</Link>
         </>
       )
     }

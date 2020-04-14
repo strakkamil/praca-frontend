@@ -23,7 +23,7 @@ class patientVisits extends Component {
 
   render() {
     const visits = this.state.visits.map(visit => (
-      <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} isDoctor={this.props.isDoctor} isPatient={this.state.isPatient} specialization={visit.specialization} getVisitId={this.props.getVisitId} />
+      <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} isDoctor={this.props.isDoctor} isPatient={this.state.isPatient} specialization={visit.specialization} getVisitId={this.props.getVisitId} cancelVisit={this.props.cancelVisit} />
     ))
     return (
       <div className="patient-visits-container">

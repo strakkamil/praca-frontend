@@ -195,6 +195,13 @@ class App extends Component {
     })
   }
 
+  cancelVisit = async (visitId) => {
+    const visit = {
+      patientId: ''
+    }
+    await axios.patch(`http://localhost:5000/visit/cancel/${visitId}`, visit, { headers: { authorization: localStorage.TOKEN_SECRET } })
+  }
+
   getVisitDescription = (field) => {
     this.setState({
       visitDescription: field
@@ -294,6 +301,7 @@ class App extends Component {
             <PatientVisits
               id={this.state.id}
               getVisitId={this.getVisitId}
+              cancelVisit={this.cancelVisit}
             />}
         />
         <Route
