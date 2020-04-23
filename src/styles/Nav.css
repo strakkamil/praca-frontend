@@ -6,19 +6,7 @@ nav{
   height: 10vh;
   box-shadow: 0 1px 4px 0px #ddd;
   background-color: white;
-  z-index: 1;
-}
-
-nav img{
-  min-height: 50px;
-  height: 10vh;
-  padding-left: 15vw;
-}
-
-nav span{
-  align-self: center;
-  font-size: 30px;
-  text-transform: uppercase;
+  z-index: 2;
 }
 
 ul{
@@ -26,6 +14,7 @@ ul{
   flex-grow: 1;
   padding-right: 15vw;
   justify-content: flex-end;
+  background-color: white;
 }
 
 li{
@@ -63,3 +52,24 @@ li:nth-child(5) a:hover{
   background-color: rgb(41,84,108) ;
   color: white;
 }
+
+.medical-logo{
+  position: absolute;
+  display: flex;
+  align-items: center;
+  width: 270px;
+  border: none;
+  text-align: left;
+  height: 10vh;
+  margin: 0 0 0 15vw;
+}
+
+.medical-logo img {
+  position: relative;
+  height: 90px;
+}
+
+.medical-logo span{
+  font-size: 30px;
+}
+

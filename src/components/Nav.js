@@ -24,7 +24,10 @@ const Nav = props => {
   }
   return (
     <nav>
-      <img src={logo} alt="logo" /><span>Ka-Med</span>
+      <NavLink to="/" className="medical-logo">
+        <img src={logo} alt="logo" />
+        <span>Ka-Med</span>
+      </NavLink>
       <ul>
         <li><ScrollLink to='about' smooth={true} duration={1000}>O nas</ScrollLink></li>
         <li><NavLink to="/tests">Badania</NavLink></li>

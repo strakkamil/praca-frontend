@@ -19,6 +19,7 @@ import DoctorVisitPage from '../pages/doctorVisitPage'
 import PatientVisits from '../pages/patientVisits'
 import VisitPanel from '../pages/visitPanel'
 import EditVisitDescription from '../components/editVisitDescription'
+import BackToTop from '../components/backToTop'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -44,14 +45,25 @@ class App extends Component {
     doctors: [],
     specialization: '',
     visitId: '',
-    visitDescription: ''
+    visitDescription: '',
   }
 
   componentDidMount() {
-    axios.get('http://localhost:5000/doctor/main', { headers: { authorization: localStorage.TOKEN_SECRET } })
-      .then(res => this.setState({
-        doctors: res.data
-      }))
+    this.getMainDoctors()
+  }
+
+  getMainDoctors = async () => {
+    const res = await axios.get('http://localhost:5000/doctor/main', { headers: { authorization: localStorage.TOKEN_SECRET } })
+    this.setState({
+      doctors: res.data
+    })
+  }
+
+  getDoctors = async () => {
+    const res = await axios.get('http://localhost:5000/doctor', { headers: { authorization: localStorage.TOKEN_SECRET } })
+    this.setState({
+      doctors: res.data
+    })
   }
 
   getDoctorId = (id) => {
@@ -218,6 +230,17 @@ class App extends Component {
     })
   }
 
+  checkScrollPosition = () => {
+    const position = window.pageYOffset
+    this.setState({
+      position
+    })
+  }
+
+  scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
   render() {
     const { isModalOpen } = this.state
     return (
@@ -336,6 +359,7 @@ class App extends Component {
           />
           <About
             onClick={this.onClickMapOpen} />
+          <BackToTop scrollToTop={this.scrollToTop} />
           <Footer />
         </Router>
       </ThemeProvider>

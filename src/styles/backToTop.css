@@ -1,0 +1,60 @@
+.back-to-top{
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70px;
+  height: 70px;
+  top: 90vh;
+  bottom: 10vh;
+  right: 7vw;
+  left: 93vw;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  box-shadow: 0 10px 30px -5px #818181;
+  overflow: hidden;
+  transition: .3s;
+  outline: none;
+}
+
+.back-to-top .icon{
+  position: relative;
+  font-size: 35px;
+  transform: translateY(0);
+  animation: arrows 10s infinite;
+}
+
+.back-to-top .icon:nth-child(1){
+  top: 18px;
+}
+
+.back-to-top .icon:nth-child(3){
+  top: -18px;
+}
+
+.back-to-top:hover{
+  background-color: rgb(41,84,108);
+}
+
+.back-to-top:hover > .icon{
+  color: white;
+}
+
+
+@keyframes arrows {
+0%{
+  transform: translateY(200%);
+}
+5%{
+  transform: translateY(0);
+}
+95%{
+  transform: translateY(0);
+}
+100%{
+  transform: translateY(-200%);
+}
+}
