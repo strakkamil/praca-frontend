@@ -33,9 +33,21 @@ class doctorVisitPage extends Component {
   }
 
   render() {
-    const visits = this.state.visits.map(visit => (
-      <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} signup={this.signUpToDoctor} />
-    ))
+    const dateNow = Date.now()
+    const visits = this.state.visits
+      .filter(visit => {
+        const h = new Date(visit.hour).getHours()
+        const m = new Date(visit.hour).getMinutes()
+        const date = new Date(visit.date)
+        date.setHours(h)
+        date.setMinutes(m)
+        return (
+          date > dateNow
+        )
+      })
+      .map(visit => (
+        <VisitCard key={visit._id} id={visit._id} patientId={visit.patientId} date={visit.date} hour={visit.hour} signup={this.signUpToDoctor} />
+      ))
     return (
       <div className="visit-page">
         <div className='doctor-visit-page'>

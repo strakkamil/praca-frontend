@@ -42,13 +42,13 @@ a:hover{
 }
 
 li:nth-child(4) a,
-li:nth-child(5) a {
+li:nth-child(3) a {
   border: 2px solid rgb(41,84,108);
   border-radius: 10px;
 }
 
 li:nth-child(4) a:hover,
-li:nth-child(5) a:hover{
+li:nth-child(3) a:hover{
   background-color: rgb(41,84,108) ;
   color: white;
 }

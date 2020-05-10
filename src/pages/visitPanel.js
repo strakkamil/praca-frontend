@@ -96,9 +96,9 @@ class visitPanel extends Component {
             {isDoctor && <span>{this.state.patient.phone}</span>}
             <span>{description ? description : 'Brak opisu'}</span>
           </div>
-          {isDoctor && <div className="edit-description">
-            <Link to='/visit/description' onClick={() => this.props.getVisitDescription(this.state.visit.description)}>Edytuj opis</Link>
-          </div>}
+          <div className="edit-description">
+            <Link to='/visit/description' onClick={() => this.props.getVisitDescription(this.state.visit.description)}>{isDoctor ? 'Edytuj opis' : 'Pokaż opis'}</Link>
+          </div>
         </div>
       </div>
     )

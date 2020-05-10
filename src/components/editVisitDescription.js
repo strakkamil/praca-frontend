@@ -23,24 +23,41 @@ class EditVisitDescription extends Component {
     })
   }
 
+  checkRole = () => {
+    if (this.props.isDoctor) {
+      return (
+        <>
+          <h1>Wpisz opis dla tej wizyty</h1>
+          <TextField
+            id="descriptionn"
+            label="Opis Wizyty"
+            multiline
+            fullWidth
+            rows={20}
+            defaultValue={this.state.description}
+            variant="outlined"
+            onChange={this.getDescription}
+          />
+          <div className="buttons">
+            <button onClick={this.handleChangeVisitDescription}>Zapisz</button>
+            <Link to='/doctor/visit/edit'>Powrót</Link>
+          </div>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <h1>Opis wizyty</h1>
+          <p>{this.state.description}</p>
+        </>
+      )
+    }
+  }
+
   render() {
     return (
       <div className='edit-field-description'>
-        <h1>Wpisz opis dla tej wizyty</h1>
-        <TextField
-          id="descriptionn"
-          label="Opis Wizyty"
-          multiline
-          fullWidth
-          rows={20}
-          defaultValue={this.state.description}
-          variant="outlined"
-          onChange={this.getDescription}
-        />
-        <div className="buttons">
-          <button onClick={this.handleChangeVisitDescription}>Zapisz</button>
-          <Link to='/doctor/visit/edit'>Powrót</Link>
-        </div>
+        {this.checkRole()}
       </div>
     )
   }

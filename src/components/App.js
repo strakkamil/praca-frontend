@@ -19,7 +19,7 @@ import DoctorVisitPage from '../pages/doctorVisitPage'
 import PatientVisits from '../pages/patientVisits'
 import VisitPanel from '../pages/visitPanel'
 import EditVisitDescription from '../components/editVisitDescription'
-import BackToTop from '../components/backToTop'
+// import BackToTop from '../components/backToTop'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 
 const theme = createMuiTheme({
@@ -230,13 +230,6 @@ class App extends Component {
     })
   }
 
-  checkScrollPosition = () => {
-    const position = window.pageYOffset
-    this.setState({
-      position
-    })
-  }
-
   scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
@@ -354,12 +347,13 @@ class App extends Component {
               <EditVisitDescription
                 visitDescription={this.state.visitDescription}
                 visitId={this.state.visitId}
+                isDoctor={this.state.isDoctor}
               />
             }
           />
           <About
             onClick={this.onClickMapOpen} />
-          <BackToTop scrollToTop={this.scrollToTop} />
+          {/* <BackToTop scrollToTop={this.scrollToTop} /> */}
           <Footer />
         </Router>
       </ThemeProvider>

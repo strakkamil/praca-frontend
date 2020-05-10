@@ -36,7 +36,7 @@ class visitCard extends Component {
     })
   }
 
-  checkIsDoctor = () => {
+  checkIsDoctor = (props) => {
     if (this.props.patientId && this.props.isDoctor) {
       return (
         <Link to='/doctor/visit/edit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
@@ -46,15 +46,30 @@ class visitCard extends Component {
         <span>Nikt się nie zapisał</span>
       )
     } else if (this.props.isPatient) {
-      return (
-        <>
-          <span>{this.props.specialization}</span>
-          <Link to='/patient/visit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
-          <Link to='/patient/visits' onClick={() => this.props.cancelVisit(this.props.id)}>Zrezygnuj</Link>
-        </>
-      )
-    }
-    else {
+      const dateNow = Date.now()
+      const h = new Date(this.props.hour).getHours()
+      const m = new Date(this.props.hour).getMinutes()
+      const date = new Date(this.props.date)
+      date.setHours(h)
+      date.setMinutes(m)
+      if (date > dateNow) {
+        return (
+          <>
+            <span>{this.props.specialization}</span>
+            <Link to='/patient/visit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
+            <Link to='/patient/visits' onClick={() => this.props.cancelVisit(this.props.id)}>Zrezygnuj</Link>
+          </>
+        )
+      } else {
+        return (
+          <>
+            <span>{this.props.specialization}</span>
+            <Link to='/patient/visit' onClick={() => this.props.getVisitId(this.props.id)}>Otwórz</Link>
+          </>
+        )
+      }
+
+    } else {
       return (
         <Link to='/patient/visits' onClick={() => this.props.signup(this.props.id)}>Zapisz</Link>
       )

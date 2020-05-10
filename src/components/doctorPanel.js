@@ -50,6 +50,40 @@ class doctorPanel extends Component {
         sortedVisits: visits
       })
     }
+    else if (filter === 'done') {
+      const dateNow = Date.now()
+      const visits = this.state.visits
+        .filter(visit => {
+          const h = new Date(visit.hour).getHours()
+          const m = new Date(visit.hour).getMinutes()
+          const date = new Date(visit.date)
+          date.setHours(h)
+          date.setMinutes(m)
+          return (
+            date < dateNow
+          )
+        })
+      this.setState({
+        sortedVisits: visits
+      })
+    }
+    else if (filter === 'undone') {
+      const dateNow = Date.now()
+      const visits = this.state.visits
+        .filter(visit => {
+          const h = new Date(visit.hour).getHours()
+          const m = new Date(visit.hour).getMinutes()
+          const date = new Date(visit.date)
+          date.setHours(h)
+          date.setMinutes(m)
+          return (
+            date > dateNow
+          )
+        })
+      this.setState({
+        sortedVisits: visits
+      })
+    }
   }
 
   handleClick = (e) => {
@@ -82,6 +116,8 @@ class doctorPanel extends Component {
                 <option aria-label="None" value="" />
                 <option value='all'>Pokaż wszystkie</option>
                 <option value='busy'>Zajęte</option>
+                <option value='done'>Odbyte</option>
+                <option value='undone'>Nieodbyte</option>
                 <option value='empty'>Wolne</option>
                 <option value='emptyDesc'>Brak opisu</option>
                 <option value='desc'>Z opisem</option>

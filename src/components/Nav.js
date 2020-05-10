@@ -30,7 +30,7 @@ const Nav = props => {
       </NavLink>
       <ul>
         <li><ScrollLink to='about' smooth={true} duration={1000}>O nas</ScrollLink></li>
-        <li><NavLink to="/tests">Badania</NavLink></li>
+        {/* <li><NavLink to="/tests">Badania</NavLink></li> */}
         {props.isDoctor ? <li><NavLink to="/doctor">Lekarze</NavLink></li> : <li><NavLink to="/doctors">Lekarze</NavLink></li>}
         {check()}
       </ul>
